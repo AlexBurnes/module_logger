@@ -7,24 +7,19 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 
-add_library(module_logger)
-target_sources(
-    module_logger
-    PUBLIC
-        FILE_SET CXX_MODULES FILES
-        include/logger.mpp
-)
-
 add_library(module-logger::module-logger INTERFACE IMPORTED)
 
-set_property(
-    TARGET module-logger::module-logger
-    APPEND PROPERTY INTERFACE_LINK_LIBRARIES
-    logger
+target_sources(module-logger::module-logger INTERFACE
+    FILE_SET module_logger
+    TYPE CXX_MODULES
+    BASE_DIRS ${CMAKE_CURRENT_LIST_DIR}/lib/cxx/miu
+    FILES ${CMAKE_CURRENT_LIST_DIR}/include/logger.mpp
 )
 
-set_property(
-    TARGET module-logger::module-logger
-    APPEND PROPERTY INTERFACE_INCLUDE_DIRECTORIES
-    ${CMAKE_CURRENT_LIST_DIR}/include
+set_target_properties(module-logger::module-logger PROPERTIES
+    CXX_EXTENSIONS OFF
+    IMPORTED_CXX_MODULES_COMPILE_FEATURES "cxx_std_20;cxx_std_11"
+    IMPORTED_CXX_MODULES_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_LIST_DIR}/include
+    INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_LIST_DIR}/include
+    INTERFACE_COMPILE_FEATURES "cxx_std_20;cxx_std_11"
 )

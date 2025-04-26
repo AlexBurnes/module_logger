@@ -25,3 +25,4 @@ etc/lur_test_*.conf
 docs/to_do_svc_target.txt
 CMakeUserPresets.json
 slim.report.json
+test_package/build

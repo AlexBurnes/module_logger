@@ -22,8 +22,8 @@ class module_loggerConanRecipe(ConanFile):
     default_options = {"flush": False}
 
     def build_requirements(self):
-        self.tool_requires("cmake/[>=3.28.1]")
-        self.tool_requires("ninja/[>=1.11.1]")
+        self.tool_requires("cmake/3.28.1")
+        self.tool_requires("ninja/1.11.1")
 
     def validate(self):
         check_min_cppstd(self, "20")
