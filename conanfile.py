@@ -8,6 +8,7 @@ import os
 class module_loggerConanRecipe(ConanFile):
     name = "module-logger"
     version = "0.1.0"
+    package_type = "library"
 
     license = "Svyazcom LCC"
     author = "Aleksey.Ozhigov <burnes@svyazcom.ru>"
@@ -18,10 +19,9 @@ class module_loggerConanRecipe(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
 
     exports_sources = "CMakeLists.txt", "src/*"
-    no_copy_source = True
 
-    options = {"flush": [True, False]}
-    default_options = {"flush": False}
+    options = {"shared": [True, False], "fPIC": [True, False]}
+    default_options = {"shared": False, "fPIC": True}
 
     def build_requirements(self):
         self.tool_requires("cmake/3.28.1")
@@ -44,17 +44,17 @@ class module_loggerConanRecipe(ConanFile):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
+        copy(self, "logger.pcm", src=os.path.join(self.build_folder, "CMakeFiles", "logger.dir"), dst=os.path.join(self.package_folder, "bmi"))
 
     def package(self):
         cmake = CMake(self)
         cmake.install()
-        copy(self, "*.mpp", self.source_folder, self.package_folder)
-        copy(self, "logger.pcm", src=os.path.join(self.build_folder, "CMakeFiles", "logger.dir"), dst=os.path.join(self.package_folder, "bmi"))
+        #copy(self, "*.mpp", self.source_folder, self.package_folder)
+        #copy(self, "logger.pcm", src=os.path.join(self.build_folder, "CMakeFiles", "logger.dir"), dst=os.path.join(self.package_folder, "bmi"))
 
     def package_info(self):
         self.cpp_info.libs = ["logger"]
         self.cpp_info.includedirs = []
-        self.cpp_info.bindirs = []
         self.cpp_info.libdirs = ["lib"]
         if self.settings.compiler == "clang":
             self.cpp_info.cxxflags = [f"-fmodule-file=logger={self.package_folder}/bmi/logger.pcm"]
