@@ -20,10 +20,10 @@ set_target_properties(
     logger PROPERTIES
     LINKER_LANGUAGE CXX
     CXX_EXTENSIONS ON
-    IMPORTED_CXX_MODULES_COMPILE_FEATURES "cxx_std_20;cxx_std_11"
+    IMPORTED_CXX_MODULES_COMPILE_FEATURES "cxx_std_20"
     IMPORTED_CXX_MODULES_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_LIST_DIR}/include
     INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_LIST_DIR}/include
-    INTERFACE_COMPILE_FEATURES "cxx_std_20;cxx_std_11"
+    INTERFACE_COMPILE_FEATURES "cxx_std_20"
 )
 
 add_library(module-logger::module-logger ALIAS logger)
@@ -31,6 +31,4 @@ add_library(module-logger::module-logger ALIAS logger)
 install(
     TARGETS logger
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    #PUBLIC_HEADER DESTINATION "include/logger"
-    #${INSTALL_FILE_SET}
 )
