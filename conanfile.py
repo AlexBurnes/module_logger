@@ -11,13 +11,13 @@ class module_loggerConanRecipe(ConanFile):
 
     license = "Svyazcom LCC"
     author = "Aleksey.Ozhigov <burnes@svyazcom.ru>"
-    url = "git@gitsrv.svyazcom.ru:common/cpplibs/log.git"
-    description = "C++20 module logger library"
+    url = "https://github.com/AlexBurnes/module_logger.git"
+    description = "C++20 module prefix library example"
     topics = ("Common", "logger")
 
     settings = "os", "compiler", "build_type", "arch"
 
-    exports_sources = "CMakeLists.txt", "include/*"
+    exports_sources = "CMakeLists.txt", "src/*"
     no_copy_source = True
 
     options = {"flush": [True, False]}

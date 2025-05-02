@@ -13,7 +13,7 @@ target_sources(
     logger PUBLIC
     FILE_SET logger
     TYPE CXX_MODULES
-    FILES include/logger.mpp
+    FILES src/logger.mpp
 )
 
 set_target_properties(
@@ -21,8 +21,6 @@ set_target_properties(
     LINKER_LANGUAGE CXX
     CXX_EXTENSIONS ON
     IMPORTED_CXX_MODULES_COMPILE_FEATURES "cxx_std_20"
-    IMPORTED_CXX_MODULES_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_LIST_DIR}/include
-    INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_CURRENT_LIST_DIR}/include
     INTERFACE_COMPILE_FEATURES "cxx_std_20"
 )
 

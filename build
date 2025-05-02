@@ -46,4 +46,5 @@ source ${BUILD_DIR}/build/${BUILD_TYPE}/generators/conanbuild.sh
 #cmake --test ${BUILD_DIR}
 
 # Create conan package
+
 conan create -pr:h ${CONAN_PROFILE} -pr:b ${CONAN_PROFILE} .
