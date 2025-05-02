@@ -1,7 +1,9 @@
 from conan import ConanFile
 from conan.tools.build import check_max_cppstd, check_min_cppstd
 from conan.tools.cmake import CMakeToolchain, CMake, CMakeDeps, cmake_layout
-from conan.tools.files import copy
+from conan.tools.files import copy, rmdir
+
+import os
 
 class module_loggerConanRecipe(ConanFile):
     name = "module-logger"
@@ -44,8 +46,15 @@ class module_loggerConanRecipe(ConanFile):
         cmake.build()
 
     def package(self):
+        cmake = CMake(self)
+        cmake.install()
         copy(self, "*.mpp", self.source_folder, self.package_folder)
+        copy(self, "logger.pcm", src=os.path.join(self.build_folder, "CMakeFiles", "logger.dir"), dst=os.path.join(self.package_folder, "bmi"))
 
     def package_info(self):
+        self.cpp_info.libs = ["logger"]
+        self.cpp_info.includedirs = []
         self.cpp_info.bindirs = []
-        self.cpp_info.libdirs = []
+        self.cpp_info.libdirs = ["lib"]
+        if self.settings.compiler == "clang":
+            self.cpp_info.cxxflags = [f"-fmodule-file=logger={self.package_folder}/bmi/logger.pcm"]

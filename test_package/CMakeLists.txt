@@ -10,13 +10,12 @@ set(CMAKE_CXX_EXTENSIONS ON)
 find_package(module-logger CONFIG REQUIRED)
 
 add_executable(
-    example 
+    example
         example.cpp
 )
 
 target_link_libraries(
-    example 
+    example
     PRIVATE
         module-logger::module-logger
 )
-
