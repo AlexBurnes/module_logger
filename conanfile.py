@@ -13,8 +13,8 @@ class module_loggerConanRecipe(ConanFile):
     license = "Svyazcom LCC"
     author = "Aleksey.Ozhigov <burnes@svyazcom.ru>"
     url = "https://github.com/AlexBurnes/module_logger.git"
-    description = "C++20 module prefix library example"
-    topics = ("Common", "logger")
+    description = "C++20 module logger library example"
+    topics = ("c++20 module", "logger", "example")
 
     settings = "os", "compiler", "build_type", "arch"
 
@@ -49,8 +49,6 @@ class module_loggerConanRecipe(ConanFile):
     def package(self):
         cmake = CMake(self)
         cmake.install()
-        #copy(self, "*.mpp", self.source_folder, self.package_folder)
-        #copy(self, "logger.pcm", src=os.path.join(self.build_folder, "CMakeFiles", "logger.dir"), dst=os.path.join(self.package_folder, "bmi"))
 
     def package_info(self):
         self.cpp_info.libs = ["logger"]
