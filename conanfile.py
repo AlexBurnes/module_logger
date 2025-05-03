@@ -24,12 +24,12 @@ class module_loggerConanRecipe(ConanFile):
     default_options = {"shared": False, "fPIC": True}
 
     def build_requirements(self):
-        self.tool_requires("cmake/3.28.1")
-        self.tool_requires("ninja/1.11.1")
+        self.tool_requires("cmake/[>=3.28.1 <4.0.0]")
+        self.tool_requires("ninja/[>=1.11.1 <2.0.0]")
 
     def validate(self):
         check_min_cppstd(self, "20")
-        check_max_cppstd(self, "23")
+        check_max_cppstd(self, "26")
 
     def layout(self):
         cmake_layout(self)
